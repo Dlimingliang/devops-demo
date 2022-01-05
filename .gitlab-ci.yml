@@ -57,7 +57,7 @@ test-deploy:
     - cd $CD_REPO_NAME
     - yq eval -i ".image.tag = \"$CI_COMMIT_SHORT_SHA\"" $CD_STAGE_FILE
     - git commit -am "stage image update"
-    - git push origin master
+    - git push origin main
 
 #test:
 #  stage: test
