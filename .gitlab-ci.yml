@@ -1,0 +1,73 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+variables:
+  IMAGE_NAME: devops-demo
+  CI_IMAGE: registry.cn-hangzhou.aliyuncs.com/lml-test/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA
+
+cache:  #3
+  paths:
+    - .m2/repository
+
+stages:
+  - package
+  - build
+#  - test
+#  - publish
+#  - test-deploy
+#  - prod-deploy
+
+package:
+  image: maven:3.5-jdk-8-alpine
+  stage: package
+  tags:
+    - develop-tag
+  script:
+    - mvn clean package -Dmaven.test.skip=true
+  artifacts:
+    paths:
+      - target/*.jar
+
+build:
+  stage: build
+  tags:
+    - develop-tag
+  before_script:
+    - docker login --username=*** --password=** registry.cn-hangzhou.aliyuncs.com
+  script:
+    - docker build -t $CI_IMAGE .
+    - docker push $CI_IMAGE
+
+#test:
+#  stage: test
+#  tags:
+#    - develop-tag
+#  before_script:
+#    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#    script:
+#      - docker pull $CI_IMAGE
+#      - docker run $CI_IMAGE echo "run test script here"
+#
+#publish:
+#  stage: publish
+#  tags:
+#    - develop-tag
+#  script:
+#    - echo "publish job"
+#
+#test-deploy:
+#  stage: test-deploy
+#  tags:
+#    - develop-tag
+#  script:
+#    - echo "staging deploy job"
+#
+#prod-deploy:
+#  stage: prod-deploy
+#  tags:
+#    - develop-tag
+#  script:
+#    - echo "production deploy job"
+#  when: manual
