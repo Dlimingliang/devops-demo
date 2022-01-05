@@ -49,7 +49,7 @@ test-deploy:
   tags:
     - develop-tag
   before_script:
-    - apk add --no-cache git yq=4.6.3-r2
+    - apk add --no-cache git
     - git config --global user.name GitLabCI
     - git config --global user.email "lml2dyy@gmail.com"
     - git clone --single-branch --branch main http://$CD_USERNAME:$CD_ACCESS_TOKEN@http://39.101.64.167/develop/CD_REPO_NAME.git
