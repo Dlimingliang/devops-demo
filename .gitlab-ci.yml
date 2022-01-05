@@ -59,7 +59,6 @@ test-deploy:
     - git commit -am "stage image update"
     - git push origin master
 
-
 #test:
 #  stage: test
 #  tags:
