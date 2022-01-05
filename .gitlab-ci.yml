@@ -38,7 +38,7 @@ build:
   tags:
     - develop-tag
   before_script:
-    - docker login --username=limingliangaiduyangyang --password=limingliang521. registry.cn-hangzhou.aliyuncs.com
+    - docker login --username=*** --password=*** registry.cn-hangzhou.aliyuncs.com
   script:
     - docker build -t $CI_IMAGE .
     - docker push $CI_IMAGE
