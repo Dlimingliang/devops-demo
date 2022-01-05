@@ -10,9 +10,9 @@ variables:
   CD_STAGE_FILE: values.yaml
   CD_PRODUCTION_FILE: values-pro.yaml
 
-cache:  #3
-  paths:
-    - .m2/repository
+#cache:  #3
+#  paths:
+#    - .m2/repository
 
 stages:
   - package
