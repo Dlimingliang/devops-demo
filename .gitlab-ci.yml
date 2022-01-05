@@ -10,9 +10,9 @@ variables:
   CD_STAGE_FILE: values.yaml
   CD_PRODUCTION_FILE: values-pro.yaml
 
-#cache:  #3
-#  paths:
-#    - .m2/repository
+cache:  #3
+  paths:
+    - .m2/repository
 
 stages:
   - package
@@ -38,7 +38,7 @@ build:
   tags:
     - develop-tag
   before_script:
-    - docker login --username=*** --password=** registry.cn-hangzhou.aliyuncs.com
+    - docker login --username=limingliangaiduyangyang --password=limingliang521. registry.cn-hangzhou.aliyuncs.com
   script:
     - docker build -t $CI_IMAGE .
     - docker push $CI_IMAGE
