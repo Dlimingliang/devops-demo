@@ -52,7 +52,7 @@ test-deploy:
     - apk add --no-cache git
     - git config --global user.name GitLabCI
     - git config --global user.email "lml2dyy@gmail.com"
-    - git clone --single-branch --branch main $CD_USERNAME:$CD_ACCESS_TOKEN@http://39.101.64.167/develop/CD_REPO_NAME.git
+    - git clone --single-branch --branch main https://$CD_USERNAME:$CD_ACCESS_TOKEN@git@39.101.64.167:develop/$CD_REPO_NAME.git
   script:
     - cd $CD_REPO_NAME
     - yq eval -i ".image.tag = \"$CI_COMMIT_SHORT_SHA\"" $CD_STAGE_FILE
